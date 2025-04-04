@@ -4,9 +4,9 @@ from streamlit_drawable_canvas import st_canvas
 import gen_equation as ge
 
 # Title 
-st.set_page_config(page_title="Expert Page", page_icon="📈")
+st.set_page_config(page_title="Expert Mode", page_icon=None)
 st.markdown(
-    "<h1>Linear Algebra: <span style='color:red'>Expert Mode</span></h1>",
+    "<h1>LinearAlgebra: <span style='color:red'>Expert Mode</span></h1>",
     unsafe_allow_html=True
 )
 
@@ -51,7 +51,7 @@ if user_input:
         if user_answer == _x:
             st.success(f"Correct! {answer_spec[op][0]} {_b} {answer_spec[op][1]} each side and dividing both sides by {_a} gives x = {_x}.")
             st.balloons()
-            
+
             # Refresh session states and rerun the app (page refresh)
             if st.button("Next Problem", type="primary"):
                 streamlit_js_eval(js_expressions="parent.window.location.reload()")

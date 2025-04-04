@@ -2,13 +2,13 @@ import streamlit as st
 
 
 st.set_page_config(
-    page_title="Linear Algebra",
-    # page_icon="👋",
+    page_title="LinearAlgebra",
+    page_icon=None,
 )
 
-st.title("Welcome to Linear Algebra!")
+st.title("Welcome to LinearAlgebra!")
 st.write("""
-    **Linear Algebra** is here to help you practice linear algebra problems in the form of ax + b = c with ease.
+    **LinearAlgebra** is here to help you practice linear algebra problems in the form of ax + b = c with ease.
 
     Please select a mode from the sidebar:
 

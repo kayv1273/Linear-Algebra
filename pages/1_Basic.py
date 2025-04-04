@@ -4,9 +4,9 @@ from streamlit_drawable_canvas import st_canvas
 import gen_equation as ge
 
 # Title 
-st.set_page_config(page_title="Basic Page", page_icon="📈")
+st.set_page_config(page_title="Basic Mode", page_icon=None)
 st.markdown(
-    "<h1>Linear Algebra: <span style='color:green'>Basic Mode</span></h1>",
+    "<h1>LinearAlgebra: <span style='color:green'>Basic Mode</span></h1>",
     unsafe_allow_html=True
 )
 
