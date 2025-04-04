@@ -1,5 +1,6 @@
 import streamlit as st
 import random
+import math
 import streamlit_shadcn_ui as ui
 
 def generate_random(start: int, end: int):
@@ -8,22 +9,23 @@ def generate_random(start: int, end: int):
         num = random.randint(start, end)
     return num
 
-def generate_valid_equation(start: int, end: int):
+def generate_equation(start: int, end: int):
     a = generate_random(start, end)
-    x = random.randint(start, end)
+    x = round(random.uniform(start, end), 2)
     b = random.randint(start, end)
-    c = a * x + b
+    c = round(a * x + b, 2)
     return a, b, c, x
 
 # Initialize the problem once using session state
 if "a" not in st.session_state:
-    a, b, c, solution_x = generate_valid_equation(-10, 10)
+    a, b, c, solution_x = generate_equation(-10, 10)
     st.session_state.a = a
     st.session_state.b = b
     st.session_state.c = c
     st.session_state.solution_x = solution_x
 
-st.title("Linear Algebra")
+st.set_page_config(page_title="Expert Page", page_icon="📈")
+st.title("Linear Algebra: Expert Mode")
 
 # Access the saved values from session state
 a = st.session_state.a
@@ -32,7 +34,7 @@ c = st.session_state.c
 solution_x = st.session_state.solution_x
 
 # # Display the equation
-st.write(f"Solve: {a}x + {b} = {c}")
+st.write(f"Solve: {a}x + {b} = {c} (Round to the nearest 2 decimals)")
 
 # User input textbox
 user_input = st.text_input("x = ", "")
@@ -41,9 +43,10 @@ user_input = st.text_input("x = ", "")
 if user_input:
     try:
         # Answer specifics
-        user_answer = int(user_input)
+        user_answer = float(user_input)
         word = ""
         e_word = ""
+
         if b < 0:
             word = "Adding"
             e_word = "add"
@@ -51,7 +54,7 @@ if user_input:
         else:
             word = "Subtracting"
             e_word = "subtract"
-        if user_answer == solution_x:
+        if math.isclose(user_answer, solution_x, abs_tol=0.01):
             st.success(f"Correct! {word} {b} to each side and dividing both sides by {a} gives x = {solution_x}.")
         else:
             st.error(f"Incorrect. You should {e_word} {b} to both sides and then divide {a} from both sides.")
