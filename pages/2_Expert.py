@@ -1,62 +1,77 @@
 import streamlit as st
-import random
-import math
-import streamlit_shadcn_ui as ui
+from streamlit_js_eval import streamlit_js_eval
+from streamlit_drawable_canvas import st_canvas
+import gen_equation as ge
 
-def generate_random(start: int, end: int):
-    num = 0
-    while num == 0:
-        num = random.randint(start, end)
-    return num
-
-def generate_equation(start: int, end: int):
-    a = generate_random(start, end)
-    x = round(random.uniform(start, end), 2)
-    b = random.randint(start, end)
-    c = round(a * x + b, 2)
-    return a, b, c, x
+# Title 
+st.set_page_config(page_title="Expert Page", page_icon="📈")
+st.markdown(
+    "<h1>Linear Algebra: <span style='color:red'>Expert Mode</span></h1>",
+    unsafe_allow_html=True
+)
 
 # Initialize the problem once using session state
-if "a" not in st.session_state:
-    a, b, c, solution_x = generate_equation(-10, 10)
-    st.session_state.a = a
-    st.session_state.b = b
-    st.session_state.c = c
-    st.session_state.solution_x = solution_x
+if "_a" not in st.session_state:
+    _a, _b, _c, _x = ge.generate_equation(-10, 10, "Expert")
+    st.session_state._a = _a
+    st.session_state._b = _b
+    st.session_state._c = _c
+    st.session_state._x = _x
 
-st.set_page_config(page_title="Expert Page", page_icon="📈")
-st.title("Linear Algebra: Expert Mode")
-
+    # Display solution in terminal 
+    print(f"[EXPERT] x = {_x} (Equation: {_a}x + {_b} = {_c})")
 # Access the saved values from session state
-a = st.session_state.a
-b = st.session_state.b
-c = st.session_state.c
-solution_x = st.session_state.solution_x
+_a = st.session_state._a
+_b = st.session_state._b
+_c = st.session_state._c
+_x = st.session_state._x
 
-# # Display the equation
-st.write(f"Solve: {a}x + {b} = {c} (Round to the nearest 2 decimals)")
+# Display the equation on screen and in terminal
+st.subheader(f"Solve: {_a}x + {_b} = {_c} (Round to the nearest 2 decimals)")
 
 # User input textbox
 user_input = st.text_input("x = ", "")
 
-# Check answer
+answer_spec = {
+    "pos": ["Subtracting", "from"],
+    "neg": ["Adding", "to"]
+}
+
+# Check user answer
 if user_input:
     try:
-        # Answer specifics
         user_answer = float(user_input)
-        word = ""
-        e_word = ""
+        op = "pos"
 
-        if b < 0:
-            word = "Adding"
-            e_word = "add"
-            b = -(b)
+        if _b < 0:
+            op = "neg"
+            _b = -(_b)
+        
+        # Correct Solution
+        if user_answer == _x:
+            st.success(f"Correct! {answer_spec[op][0]} {_b} {answer_spec[op][1]} each side and dividing both sides by {_a} gives x = {_x}.")
+            st.balloons()
+            
+            # Refresh session states and rerun the app (page refresh)
+            if st.button("Next Problem", type="primary"):
+                streamlit_js_eval(js_expressions="parent.window.location.reload()")
+
+        # Incorrect Solution
         else:
-            word = "Subtracting"
-            e_word = "subtract"
-        if math.isclose(user_answer, solution_x, abs_tol=0.01):
-            st.success(f"Correct! {word} {b} to each side and dividing both sides by {a} gives x = {solution_x}.")
-        else:
-            st.error(f"Incorrect. You should {e_word} {b} to both sides and then divide {a} from both sides.")
+            st.error(f"Incorrect. You should try {answer_spec[op][0].lower()} {_b} {answer_spec[op][1]} both sides and then divide {_a} from both sides.")
+    
+    # Non-numerical value is entered
     except ValueError:
-        st.error("Please enter a valid integer.")
+        st.error("Please enter a valid number.")
+
+# Optional Scratch paper in sidebar
+with st.sidebar:
+    st.markdown("### Scratch Paper:")
+    canvas_result = st_canvas(
+        stroke_width=3,
+        stroke_color='#000000',
+        background_color='#FFFFFF',
+        height=450,
+        drawing_mode='freedraw',
+        key="canvas_sidebar",
+    )

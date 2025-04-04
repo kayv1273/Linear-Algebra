@@ -1,67 +1,27 @@
 import streamlit as st
-import streamlit_shadcn_ui as ui
-from streamlit_extras.switch_page_button import switch_page
-import pages
+
 
 st.set_page_config(
     page_title="Linear Algebra",
     # page_icon="👋",
 )
 
-# st.markdown(
-#     """
-#     <style>
-#         [data-testid="stSidebar"] {
-#             display: none;
-#         }
-#     </style>
-#     """,
-#     unsafe_allow_html=True
-# )
-
 st.title("Welcome to Linear Algebra!")
-st.write("Please select a mode from the side bar. Basic mode deals with only integer solutions. Expert mode deals with rounded decimal solutions.")
-st.write("Happy solving!")
+st.write("""
+    **Linear Algebra** is here to help you practice linear algebra problems in the form of ax + b = c with ease.
 
-# st.markdown(
-#     """
-#     <a href="/Basic" target="_self">
-#         <button style="
-#             background-color: #4CAF50;
-#             color: white;
-#             padding: 10px 24px;
-#             border: none;
-#             border-radius: 8px;
-#             text-align: center;
-#             text-decoration: none;
-#             display: inline-block;
-#             font-size: 16px;
-#             cursor: pointer;
-#         ">
-#             Basic
-#         </button>
-#     </a>
-#     """,
-#     unsafe_allow_html=True
-# )
-# st.markdown(
-#     """
-#     <a href="/Expert" target="_self">
-#         <button style="
-#             background-color: #FF603E;
-#             color: white;
-#             padding: 10px 24px;
-#             border: none;
-#             border-radius: 8px;
-#             text-align: center;
-#             text-decoration: none;
-#             display: inline-block;
-#             font-size: 16px;
-#             cursor: pointer;
-#         ">
-#             Expert
-#         </button>
-#     </a>
-#     """,
-#     unsafe_allow_html=True
-# )
+    Please select a mode from the sidebar:
+
+    - **Basic Mode**: This mode focuses on solving simple linear equations with integer solutions. Primarily for beginners or anyone needing to practice.
+
+    - **Expert Mode**: This mode focuses on solving equations with decimal solutions. Primarily for those who are looking for a challenge.
+
+    **How it works:**
+    1. Once you select a mode, an equation will be generated randomly for you to solve.
+    2. You will input your solution in the text box.
+    3. You'll get instant feedback on whether your answer is correct or not.
+    4. After each problem, you can move on to the next problem and continue practicing.
+
+    **Happy Solving!**
+    Keep practicing, and you'll improve your solving skills in no time!
+""")
