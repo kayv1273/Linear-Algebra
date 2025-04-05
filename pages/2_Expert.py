@@ -27,9 +27,10 @@ _c = st.session_state._c
 _x = st.session_state._x
 
 # Display the equation on screen and in terminal
-st.subheader(f"Solve: {_a}x + {_b} = {_c} (Round to the nearest 2 decimals)")
+st.subheader(f"Solve: {_a}x + {_b} = {_c}")
 
 # User input textbox
+st.write("(Round to the nearest 2 decimals)")
 user_input = st.text_input("x = ", "")
 
 answer_spec = {
