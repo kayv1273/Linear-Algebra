@@ -39,7 +39,13 @@ To boot up this project locally, you must have the following imports:
 git clone https://github.com/kayv1273/Linear-Algebra
 ```
 
-2. Run the server with command in terminal:
+2. Install all packages, preferably in a virtual environment
+
+```sh
+pip install -r requirements.txt
+```
+
+3. Run the server with command in terminal:
 
 ```sh
 streamlit run Home.py
