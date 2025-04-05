@@ -1,5 +1,7 @@
 # Linear Algebra: Technical Generalist Project
 
+Deployed Project: https://linearalgebra.streamlit.app
+
 ## Overview
 
 This project helps students practice solving basic linear equations with one variable through the equation form ax + b = c, where a, b and c are integers, and the equation has an integer solution.
