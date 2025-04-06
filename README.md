@@ -27,11 +27,12 @@ These requirements were met and can be found in the Basic Mode page of the appli
 
 ## Getting Started
 
-To boot up this project locally, you must have the following imports:
+To boot up this project locally, you must have the following imports as well as Python:
 
-1. streamlit
-2. streamlit_js_eval
-3. streamlit_drawable_canvas
+1. Python 3.6+
+2. streamlit
+3. streamlit_js_eval
+4. streamlit_drawable_canvas
 
 ## Set up
 
@@ -41,13 +42,37 @@ To boot up this project locally, you must have the following imports:
 git clone https://github.com/kayv1273/Linear-Algebra
 ```
 
-2. Install all packages, preferably in a virtual environment
+2. Create a virtual environment and activate it:
+
+```sh
+python -m venv venv
+```
+
+On MacOS/Linux:
+
+```sh
+source venv/bin/activate
+```
+
+On Windows (CMD)
+
+```sh
+venv\Scripts\activate
+```
+
+On Windows (PowerShell)
+
+```sh
+venv\Scripts\Activate.ps1
+```
+
+3. Install all packages:
 
 ```sh
 pip install -r requirements.txt
 ```
 
-3. Run the server with command in terminal:
+4. Run the server with command in terminal:
 
 ```sh
 streamlit run Home.py
@@ -64,3 +89,5 @@ streamlit run Home.py
 - Expert Mode: This mode was an extra feature added by me (for fun) to implement an ax + b = c equation with a decimal solution. It is exactly the same format as the Basic Mode, but the answer will have to be rounded to 2 decimals.
 
 - Scratch Paper: In the side bar for the Basic and Expert Mode Pages, there is a drawable canvas that the user can have scratch paper. This is entirely optional and up to the user whether or not they want to use it.
+
+- Answer Reveal: If the user does not input a correct answer after 5 unique attempts, a reveal answer button will be displayed for the user to click and see how to get to the final answer.
